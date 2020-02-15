@@ -24,8 +24,9 @@ class FilterTableProduct extends Component {
     render() {
         return (
             <div>
-                <h1>Productos</h1>
+                <h1>Products</h1>
                 <SearchBar filterStock = {this.state.filterStock}  onChangeFilterStock={this.onChangeFilterStock} onChangeFilterText={this.onChangeFilterText}/>
+                <br></br>
                 <ProductTable productos = {this.props.productos} filterStock={this.state.filterStock} filterText = {this.state.filterText}/>
             </div>
         )
@@ -40,9 +41,17 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
-                <input name="search" onChange={this.onChange}/> <br/>
-                <input type="checkbox" onChange={this.props.onChangeFilterStock} /> Productos en stock
+            <div className>
+                <div className="form-group">
+                     <input name="search" onChange={this.onChange} className="form-control" placeholder="Product name"/>
+                </div>
+                <div className="form-check">
+                    <input type="checkbox" className="form-check-input" onChange={this.props.onChangeFilterStock} /> 
+                    <label className="form-check-label">
+                     Product Stock
+                    </label>
+                </div>
+                
             </div>
         )
     }
@@ -103,11 +112,11 @@ class ProductTable extends Component {
         });
 
         return (
-            <table>
+            <table className="table table-bordered">
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Prime</td>
+                        <th className="w-50">Name</th>
+                        <th className="w-50">Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +131,7 @@ class ProductCategoryRow extends Component {
     render() {
         return (
             <tr>
-                <th colSpan="2">{this.props.category}</th>
+                <th colSpan="2" className="text-center">{this.props.category}</th>
             </tr>
         )
     }
@@ -139,8 +148,8 @@ class ProductRow extends Component {
         const name = product.stocked ? product.name : this.stockAgotado(product.name);
         return (
             <tr>
-                <td> {product.price} </td>
                 <td> {name} </td>
+                <td> {product.price} </td>
             </tr>
         );
     }
@@ -151,8 +160,8 @@ class App extends Component {
 
     render() {
       return (
-      <div>
-          <FilterTableProduct productos = {PRODUCTS}/>
+      <div className="col-md-4 mt-4 mx-auto">
+          <FilterTableProduct productos = {PRODUCTS} />
       </div>
       );
     }
